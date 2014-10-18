@@ -1,3 +1,6 @@
+---
+output: html_document
+---
 <properties urlDisplayName="Get Started" pageTitle="Get started using HBase with Hadoop in HDInsight | Azure" metaKeywords="" description="Get started using HBase with Hadoop in HDInsight. learn how to created HBase tables and query them with Hive." metaCanonical="" services="hdinsight" documentationCenter="" title="Get started using HBase with Hadoop in HDInsight" authors="bradsev" solutions="big-data" manager="paulettm" editor="cgronlun" />
 
 <tags ms.service="hdinsight" ms.workload="big-data" ms.tgt_pltfrm="na" ms.devlang="na" ms.topic="article" ms.date="08/21/2014" ms.author="bradsev" />
@@ -146,7 +149,7 @@ Note: The HBase shell link switches the tab to the **HBase Shell**.
 
 Marlin is a thin layer on top of the REST API, which takes care of interacting with HBase using ProtoBuf in C#. The Marlin project must be downloaded from github and the project built to use the HBase .NET SDK.
 
-1. Follow the build steps described onDownload the Marlin project from the [Marlin's project page](https://github.com/thomasjungblut/marlin). Unzip it to a local directory. 
+1. Follow the build steps described in README.md file of the Marlin project from the [Microsoft HBase REST Client Library for .NET](https://github.com/hdinsight/hbase-sdk-for-net). Unzip it to a local directory. 
 
 2. Open the project up in Visual Studio. Open up the Manage NuGet Package Manager wizard by going to the **TOOLS** menus -> **Library Package Manager** and select **Manage NuGet packages for Solution ...** 
 	
@@ -158,8 +161,8 @@ Marlin is a thin layer on top of the REST API, which takes care of interacting w
 
 5. Create a new instance of Marlin using the cluster credentials and retrieve the cluster version:
 
-		var credentials = ClusterCredentials.Create("https://yourclustername.azurehdinsight.net/", "user", "password");
-		    var marlin = new Marlin(credentials);
+		var credentials = ClusterCredentials.Create(new Uri("https://yourclustername.azurehdinsight.net/"), "user", "password");
+		    var marlin = new HBaseClient(credentials);
 		// retrieve the version as a test
 		var version = marlin.GetVersion();
 		Console.WriteLine(version);
